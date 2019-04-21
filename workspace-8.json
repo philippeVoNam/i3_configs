@@ -1,0 +1,76 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 410,
+       "width": 654,
+       "x": 0,
+       "y": 0
+    },
+    "name": "namv@nam-pc:~",
+    "percent": 0.5,
+    "swallows": [
+       {
+        "class": "^Termite$",
+        "instance": "^nam$"
+       // "title": "^namv\\@nam\\-pc\\:\\~$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    // splitv split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.5,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 410,
+               "width": 654,
+               "x": 0,
+               "y": 0
+            },
+            "name": "namv@nam-pc:~",
+            "percent": 0.5,
+            "swallows": [
+               {
+                "class": "^Termite$"
+                //"instance": "^2$"
+               // "title": "^namv\\@nam\\-pc\\:\\~$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 410,
+               "width": 654,
+               "x": 0,
+               "y": 0
+            },
+            "name": "namv@nam-pc:~",
+            "percent": 0.5,
+            "swallows": [
+               {
+                "class": "^Termite$"
+                //"instance": "^3$"
+               // "title": "^namv\\@nam\\-pc\\:\\~$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
