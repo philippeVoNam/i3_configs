@@ -1,0 +1,9 @@
+#
+#exec_always --no-startup-id i3-msg "workspace 1; append_layout /home/namv/.i3/workspace-1.json"
+exec termite --name=htop -e 'bash -c "htop && bash"' --hold &
+exec termite --name=task -e 'bash -c "task && bash"' --hold &
+exec termite --name=calcurse -e 'bash -c "calcurse && bash"' --hold &
+
+i3blocks -c ~/.i3/i3blocks.conf
+
+exec --no-startup-id i3-msg 'workspace 1; exec termite --name=htop -e 'bash -c "htop && bash"' --hold &'/

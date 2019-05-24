@@ -16,7 +16,7 @@ hide_edge_borders none
 
 # change borders
 bindsym $mod+u border none
-bindsym $mod+y border pixel 1
+#bindsym $mod+y border pixel 1
 bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -43,10 +43,10 @@ bindsym $mod+z exec --no-startup-id morc_menu
 ################################################################################################
 
 exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+#bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
-#bindsym $mod+Ctrl+m exec pavucontrol
+bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
 
@@ -67,16 +67,16 @@ bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart du
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
-bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+#bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # focus_follows_mouse no
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -85,10 +85,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -102,7 +102,8 @@ bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
-bindsym $mod+h split h;exec notify-send 'tile horizontally'
+#bindsym $mod+h split h;exec notify-send 'tile horizontally'
+bindsym $mod+s split h;exec notify-send 'tile horizontally'
 bindsym $mod+v split v;exec notify-send 'tile vertically'
 #bindsym $mod+q split toggle
 
@@ -110,7 +111,7 @@ bindsym $mod+v split v;exec notify-send 'tile vertically'
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -141,14 +142,14 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 1: :Dock
-set $ws2 2::Web
+set $ws1 1:⛴️:Dock
+set $ws2 2:🌍:Web
 set $ws3 3::Folder
-set $ws4 4::Mail
-set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
+set $ws4 4::Code
+set $ws5 5::Study
+set $ws6 6::Mail
+set $ws7 7:
+set $ws8 8:
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -320,7 +321,7 @@ set_from_resource $term_color15    color15
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
 	i3bar_command i3bar
-	status_command i3status
+	status_command i3blocks -c ~/.i3/i3blocks.conf
 	position top
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
@@ -329,7 +330,7 @@ bar {
 
 	bindsym button4 nop
 	bindsym button5 nop
-#   font xft:URWGothic-Book 11
+	font pango:DejaVu Sans Mono, Icons 11
 	strip_workspace_numbers yes
 
     colors {
@@ -419,3 +420,17 @@ mode "$mode_gaps_outer" {
 # Custom Bindings
 bindsym $mod+x exec --no-startup-id pcmanfm
 bindsym $mod+g exec --no-startup-id chromium
+bindsym $mod+y exec --no-startup-id chromium --app="http://www.youtube.com/"
+bindsym $mod+Shift+x exec --no-startup-id termite -e "ranger"
+
+#i3blocks related
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
+# Scaling of everything
+exec xrandr --dpi 100
+
+# Layouts
+bindsym $mod+c exec --no-startup-id workspace $ws1; append_layout /home/namv/.i3/workspace-1.json; exec termite --name=cmus -e "cmus" --hold &; exec rambox; exec termite --name=gcalcli -e 'gcalcli calw' --hold &; exec termite --name=task -e "task" --hold &;
+
+#exec_always --no-startup-id i3-msg "workspace $ws4; append_layout /home/namv/.i3/workspace-4.json; exec code; exec termite --name=ranger -e "ranger"; exec termite --name=termite "
