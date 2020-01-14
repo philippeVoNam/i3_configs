@@ -8,7 +8,7 @@ set $mod Mod1
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-new_window pixel 1
+new_window pixel 0
 new_float normal
 
 # Hide borders
@@ -17,7 +17,7 @@ hide_edge_borders none
 # change borders
 bindsym $mod+u border none
 #bindsym $mod+y border pixel 1
-bindsym $mod+n border normal
+#bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -61,7 +61,7 @@ bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec gksu pcmanfm
 bindsym $mod+F5 exec terminal -e 'mocp'
-bindsym $mod+t exec --no-startup-id pkill compton
+# bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym Print exec --no-startup-id i3-scrot
@@ -148,7 +148,7 @@ set $ws3 3::Folder
 set $ws4 4::Code
 set $ws5 5::Study
 set $ws6 6::Mail
-set $ws7 7:
+set $ws7 7::Music
 set $ws8 8:
 
 # switch to workspace
@@ -258,10 +258,10 @@ mode "resize" {
         bindsym semicolon resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 1 px or 1 ppt
+        bindsym Down resize grow height 1 px or 1 ppt
+        bindsym Up resize shrink height 1 px or 1 ppt
+        bindsym Right resize grow width 1 px or 1 ppt
 
         # exit resize mode: Enter or Escape
         bindsym Return mode "default"
@@ -281,11 +281,15 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
-exec --no-startup-id start_conky_maia
+# exec --no-startup-id start_conky_green
 # exec --no-startup-id start_conky_green
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
+
+# Fix Windows
+exec xrandr --dpi 100
+exec --no-startup-id xrandr --dpi 100 --output DP-1 --auto --right-of HDMI-0
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -334,11 +338,11 @@ bar {
 	strip_workspace_numbers yes
 
     colors {
-        background #00214c
+        background #08080A
         statusline #F9FAF9
         separator  #454947
 
-#                      border  backgr. text
+#                      	   border  backgr. text
         focused_workspace  #3AFF93 #3AFF93 #000000
         active_workspace   #595B5B #353836 #FDF6E3
         inactive_workspace #595B5B #222D31 #EEE8D5
@@ -420,8 +424,12 @@ mode "$mode_gaps_outer" {
 # Custom Bindings
 bindsym $mod+x exec --no-startup-id pcmanfm
 bindsym $mod+g exec --no-startup-id chromium
-bindsym $mod+y exec --no-startup-id chromium --app="http://www.youtube.com/"
+bindsym $mod+y exec --no-startup-id chromium --new-window youtube.com
+bindsym $mod+t exec --no-startup-id chromium --new-window trello.com
+bindsym $mod+n exec --no-startup-id notion-app
+bindsym $mod+c exec --no-startup-id chromium --new-window trello.com wrike.com benchling.com notion.so gmail.com
 bindsym $mod+Shift+x exec --no-startup-id termite -e "ranger"
+bindsym $mod+o exec --no-startup-id termite -e "/home/namv/Documents/Personal_Projects/Homework_Board/HomeworkBoard/code/bin/run"
 
 #i3blocks related
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
@@ -431,6 +439,30 @@ bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 exec xrandr --dpi 100
 
 # Layouts
-bindsym $mod+c exec --no-startup-id workspace $ws1; append_layout /home/namv/.i3/workspace-1.json; exec termite --name=cmus -e "cmus" --hold &; exec rambox; exec termite --name=gcalcli -e 'gcalcli calw' --hold &; exec termite --name=task -e "task" --hold &;
+# bindsym $mod+c exec --no-startup-id workspace $ws1; append_layout /home/namv/.i3/workspace-1.json; exec termite --name=cmus -e "cmus" --hold &; exec rambox; exec termite --name=gcalcli -e 'gcalcli calw' --hold &; exec termite --name=task -e "task" --hold &;
 
 #exec_always --no-startup-id i3-msg "workspace $ws4; append_layout /home/namv/.i3/workspace-4.json; exec code; exec termite --name=ranger -e "ranger"; exec termite --name=termite "
+
+# Default floating mode
+
+# force floating for all new windows
+# for_window [class="[.]*"] floating enable
+
+# wal
+
+# Set colors from Xresources
+# Change 'color7' and 'color2' to whatever colors you want i3 to use 
+# from the generated scheme.
+# NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
+# it fails to get colors from Xresources.
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+client.background       $bg
